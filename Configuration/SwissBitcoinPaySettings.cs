@@ -19,6 +19,11 @@ namespace SmartStore.SwissBitcoinPay.Settings
         /// </summary>
         public string ApiSecret { get; set; }
 
+        /// <summary>
+        /// The merchant accepts payments on chain ?
+        /// </summary>
+        public bool AcceptOnChain { get; set; }
+
         public decimal AdditionalFee { get; set; }
 
         public bool AdditionalFeePercentage { get; set; }

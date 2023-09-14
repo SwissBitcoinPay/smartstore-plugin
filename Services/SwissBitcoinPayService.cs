@@ -36,30 +36,13 @@ namespace SmartStore.SwissBitcoinPay.Services
                     email = paymentData.BuyerEmail,
                     emailLanguage = paymentData.Lang,
                     redirectAfterPaid = paymentData.RedirectionURL,
-                    webhook = paymentData.WebHookURL
+                    webhook = paymentData.WebHookURL,
+                    delay = 60,
+                    onChain = settings.AcceptOnChain
 				};
 				var invoiceJson = JsonConvert.SerializeObject(invoice, Formatting.None);
 
 				string sUrl = settings.ApiUrl.EndsWith("/") ? settings.ApiUrl : settings.ApiUrl + "/";
-               /* HttpWebRequest req = (HttpWebRequest)WebRequest.Create($"{sUrl}checkout");
-				req.Method = "POST";
-				req.ContentType = "application/json; charset=utf-8";
-				req.Accept = "application/json";
-				req.Headers.Add("api-key", settings.ApiKey);
-
-				using (var wrt = new StreamWriter(req.GetRequestStream())) {
-					wrt.Write(invoiceJson);
-				}
-
-				string sRep;
-				using (var rep = req.GetResponse())
-				{
-					using (var rdr = new StreamReader(rep.GetResponseStream()))
-					{
-						sRep = rdr.ReadToEnd();
-					}
-				}*/
-
                 var client = new HttpClient()
                 {
                     BaseAddress = new Uri(sUrl)

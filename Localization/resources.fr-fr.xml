@@ -35,21 +35,28 @@
 		<LocaleResource Name="ApiKey.Hint">
 			<Value>La valeur de la clé API générée dans votre compte Swiss Bitcoin Pay</Value>
 		</LocaleResource>
-		<LocaleResource Name="ApiSecret">
-			<Value>API Secret</Value>
-		</LocaleResource>
-		<LocaleResource Name="ApiSecret.Hint">
-			<Value>La valeur secrète générée dans votre compte Swiss Bitcoin Pay</Value>
-		</LocaleResource>
-	 <LocaleResource Name="PaymentInfo">
-        <Value>Après avoir complété la commande, vous serez redirigé vers Swiss Bitcoin Pay, d'où vous pourrez effectuer le paiement Bitcoin de votre commande.</Value>
-      </LocaleResource>
-      <LocaleResource Name="Agreement">
-        <Value>J'accepte.</Value>
-      </LocaleResource>
-      <LocaleResource Name="Agreement.Message">
-        <Value>Veuillez accecpter la redirection vers Swiss Bitcoin Pay pour traiter votre paiement Bitcoin.</Value>
-      </LocaleResource>
+        <LocaleResource Name="ApiSecret">
+            <Value>API Secret</Value>
+        </LocaleResource>
+        <LocaleResource Name="ApiSecret.Hint">
+            <Value>La valeur secrète générée dans votre compte Swiss Bitcoin Pay</Value>
+        </LocaleResource>
+        <LocaleResource Name="AcceptOnChain">
+            <Value>Accepter paiements OnChain</Value>
+        </LocaleResource>
+        <LocaleResource Name="AcceptOnChain.Hint">
+            <Value>Accepter les paiements Bitcoin OnChain ?</Value>
+        </LocaleResource>
+              
+        <LocaleResource Name="PaymentInfo">
+            <Value>Après avoir complété la commande, vous serez redirigé vers Swiss Bitcoin Pay, d'où vous pourrez effectuer le paiement Bitcoin de votre commande.</Value>
+        </LocaleResource>
+        <LocaleResource Name="Agreement">
+            <Value>J'accepte.</Value>
+        </LocaleResource>
+        <LocaleResource Name="Agreement.Message">
+            <Value>Veuillez accecpter la redirection vers Swiss Bitcoin Pay pour traiter votre paiement Bitcoin.</Value>
+        </LocaleResource>
       
 
     </Children>

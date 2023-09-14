@@ -36,6 +36,13 @@
 		<LocaleResource Name="ApiSecret.Hint">
 			<Value>The Api Secret value generated in your Swiss Bitcoin Pay account</Value>
 		</LocaleResource>
+        <LocaleResource Name="AcceptOnChain">
+            <Value>Accept OnChain payments</Value>
+        </LocaleResource>
+        <LocaleResource Name="AcceptOnChain.Hint">
+            <Value>Accept Bitcoin OnChain payments?</Value>
+        </LocaleResource>            
+            
       <LocaleResource Name="AdminInstruction">
         <Value>
           <![CDATA[

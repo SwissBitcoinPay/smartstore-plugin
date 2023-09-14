@@ -41,6 +41,14 @@
 		<LocaleResource Name="ApiSecret.Hint">
 			<Value>Der geheime Wert, der in Ihrem Swiss Bitcoin Pay-Konto generiert wird</Value>
 		</LocaleResource>
+        <LocaleResource Name="AcceptOnChain">
+            <Value>Akzeptieren Sie OnChain-Zahlungen</Value>
+        </LocaleResource>
+        <LocaleResource Name="AcceptOnChain.Hint">
+            <Value>Akzeptieren Sie Bitcoin OnChain-Zahlungen?</Value>
+        </LocaleResource>              
+              
+              
 	 <LocaleResource Name="PaymentInfo">
         <Value>Nach Abschluss der Bestellung werden Sie zu Swiss Bitcoin Pay weitergeleitet, von wo aus Sie die Bitcoin-Zahlung für Ihre Bestellung durchführen können.</Value>
       </LocaleResource>

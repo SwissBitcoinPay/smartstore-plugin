@@ -8,8 +8,8 @@ namespace SmartStore.SwissBitcoinPay.Models
         public string description;
         public decimal amount;
         public string unit;
-        //public bool onChain;
-        //public int delay;
+        public bool onChain;
+        public int delay;
         public string email;
         public string emailLanguage;
         public string redirectAfterPaid;

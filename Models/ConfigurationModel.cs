@@ -6,16 +6,20 @@
 
         [LocalizedDisplay("*ApiUrl")]
         [Url]
-        //[Required]
+        [Required]
         public string ApiUrl { get; set; }
 
         [LocalizedDisplay("*ApiKey")]
-        //[Required]
+        [Required]
         public string ApiKey { get; set; }
 
         [LocalizedDisplay("*ApiSecret")]
-        //[Required]
+        [Required]
         public string ApiSecret { get; set; }
+
+        [LocalizedDisplay("*AcceptOnChain")]
+        public bool AcceptOnChain { get; set; }
+
 
         [LocalizedDisplay("Admin.Configuration.Payment.Methods.AdditionalFee")]
         public decimal AdditionalFee { get; set; }

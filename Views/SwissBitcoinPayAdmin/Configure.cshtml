@@ -30,9 +30,9 @@
 </div>
 
 <form asp-action="Configure">
-    <!--<div asp-validation-summary="All"/>-->
+    <div asp-validation-summary="ModelOnly"/>
 <div class="adminContent">
-    <div class="adminRow">
+   <div style="display:none">
         <div class="adminTitle">
             <smart-label asp-for="ApiUrl" />
         </div>
@@ -52,15 +52,25 @@
             </div>
     </div>
 
-    <div class="adminRow">
-        <div class="adminTitle">
+        <div class="adminRow">
+            <div class="adminTitle">
                 <smart-label asp-for="ApiSecret" />
             </div>
             <div class="adminData">
                 <setting-editor asp-for="ApiSecret" />
-                <span asp-validation-for="ApiSecret"/>
+                <span asp-validation-for="ApiSecret" />
             </div>
-    </div>
+        </div>
+
+        <div class="adminRow">
+            <div class="adminTitle">
+                <smart-label asp-for="AcceptOnChain" />
+            </div>
+            <div class="adminData">
+                <setting-editor asp-for="AcceptOnChain" />
+                <span asp-validation-for="AcceptOnChain" />
+            </div>
+        </div>
 
         <div class="adminRow">
             <div class="adminTitle">
