@@ -35,16 +35,30 @@ namespace Smartstore.SwissBitcoinPay.Controllers
         public async Task<IActionResult> Process([FromHeader(Name = "sbp-sig")] string SwissBtcPaySig)
         {
             string jsonStr = "";
+            int step = 0;
             try
             {
+                if (SwissBtcPaySig.IsNullOrEmpty())
+                {
+                    Logger.Error("Secret key not set");
+                    return StatusCode(StatusCodes.Status400BadRequest);
+                }
+                
+                step++;
                 jsonStr = await new StreamReader(Request.Body).ReadToEndAsync();
                 dynamic jsonData = JsonConvert.DeserializeObject(jsonStr);
+
+                step++;
                 var SwissBtcPaySecret = SwissBtcPaySig.Split('=')[1];
 
+                step++;
                 string Description = jsonData.description;
                 var tblDescription = Description.Split("#");
+                step++;
                 string OrderGuid = tblDescription[1].Split(":")[1].Trim();
+                step++;
                 int StoreID = Convert.ToInt32(tblDescription[2].Split(":")[1].Trim());
+                step++;
 
                 if (String.IsNullOrEmpty(OrderGuid) || StoreID == 0)
                 {
@@ -52,24 +66,29 @@ namespace Smartstore.SwissBitcoinPay.Controllers
                     return StatusCode(StatusCodes.Status422UnprocessableEntity);
                 }
 
+                step++;
                 if (!SwissBitcoinPayService.CheckSecretKey(_settings.ApiSecret, jsonStr, SwissBtcPaySecret))
                 {
                     Logger.Error("Bad secret key");
                     return StatusCode(StatusCodes.Status400BadRequest);
                 }
+                step++;
 
 
                 bool IsPaid = jsonData.isPaid;
                 bool IsExpired = jsonData.isExpired;
 
+                step++;
                 var order = await _db.Orders.FirstOrDefaultAsync(x =>
                     x.PaymentMethodSystemName == PaymentProvider.SystemName &&
                     x.OrderGuid == new Guid(OrderGuid));
+                step++;
                 if (order == null)
                 {
                     Logger.Error("Missing order");
                     return StatusCode(StatusCodes.Status422UnprocessableEntity);
                 }
+                step++;
 
 
                 if (IsPaid) order.PaymentStatus = PaymentStatus.Paid;
@@ -80,13 +99,14 @@ namespace Smartstore.SwissBitcoinPay.Controllers
                 }
                 order.HasNewPaymentNotification = true;
                 order.AddOrderNote("PaymentStatus: " + order.PaymentStatus.ToString(), true);
+                step++;
 
                 await _db.SaveChangesAsync();
                 return Ok();
             }
             catch (Exception ex)
             {
-                Logger.Error($"{jsonStr} - {ex.Message}");
+                Logger.Error($"{step.ToString()} - {jsonStr} - {ex.Message}");
                 return StatusCode(StatusCodes.Status400BadRequest);
             }
         }
