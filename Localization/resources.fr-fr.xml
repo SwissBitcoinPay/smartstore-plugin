@@ -1,0 +1,57 @@
+﻿<Language Name="English" IsDefault="false" IsRightToLeft="false">
+  <LocaleResource Name="Plugins.FriendlyName.SmartStore.SwissBitcoinPay" AppendRootKey="false">
+    <Value>Swiss Bitcoin Pay</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Description.SmartStore.SwissBitcoinPay" AppendRootKey="false">
+    <Value>Acceptez Bitcoin dans votre boutique SmartStore avec Swiss Bitcoin Pay</Value>
+  </LocaleResource>
+  
+  <!-- (Provider name) will be displayed in frontend on payment selection page and in backend on payment configuration list -->
+  <LocaleResource Name="Plugins.FriendlyName.Payments.SwissBitcoinPay" AppendRootKey="false">
+    <Value>Swiss Bitcoin Pay</Value>
+  </LocaleResource>
+  <!-- (Provider description) will be displayed in frontend on payment selection page and in backend on payment configuration list -->
+  <LocaleResource Name="Plugins.Description.Payments.SwissBitcoinPay" AppendRootKey="false">
+    <Value>Acceptez Bitcoin dans votre boutique SmartStore avec Swiss Bitcoin Pay</Value>
+  </LocaleResource>
+  
+  <LocaleResource Name="Plugins.SmartStore.SwissBitcoinPay" AppendRootKey="false">
+		  <Children>
+      <LocaleResource Name="AdminInstruction">
+        <Value>
+          <![CDATA[
+<div class="mb-1">Saisssez les données ci-dessous pour configurer ce plugin :</div> ]]>
+	  </Value>
+      </LocaleResource>
+		<LocaleResource Name="ApiUrl">
+			<Value>Adresse de l'API</Value>
+		</LocaleResource>
+		<LocaleResource Name="SwissBitcoinPayUrl.Hint">
+			<Value>L'adresse de l'API de Swiss Bitcoin Pay</Value>
+		</LocaleResource>
+		<LocaleResource Name="ApiKey">
+			<Value>Clé de l'API</Value>
+		</LocaleResource>
+		<LocaleResource Name="ApiKey.Hint">
+			<Value>La valeur de la clé API générée dans votre compte Swiss Bitcoin Pay</Value>
+		</LocaleResource>
+		<LocaleResource Name="ApiSecret">
+			<Value>API Secret</Value>
+		</LocaleResource>
+		<LocaleResource Name="ApiSecret.Hint">
+			<Value>La valeur secrète générée dans votre compte Swiss Bitcoin Pay</Value>
+		</LocaleResource>
+	 <LocaleResource Name="PaymentInfo">
+        <Value>Après avoir complété la commande, vous serez redirigé vers Swiss Bitcoin Pay, d'où vous pourrez effectuer le paiement Bitcoin de votre commande.</Value>
+      </LocaleResource>
+      <LocaleResource Name="Agreement">
+        <Value>J'accepte.</Value>
+      </LocaleResource>
+      <LocaleResource Name="Agreement.Message">
+        <Value>Veuillez accecpter la redirection vers Swiss Bitcoin Pay pour traiter votre paiement Bitcoin.</Value>
+      </LocaleResource>
+      
+
+    </Children>
+  </LocaleResource>
+</Language>

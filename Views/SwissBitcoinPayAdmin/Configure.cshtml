@@ -1,0 +1,85 @@
+﻿@using static Smartstore.SwissBitcoinPay.Module;
+
+@model ConfigurationModel
+@{
+    Layout = "_ConfigureProvider";
+}
+
+@await Component.InvokeAsync("StoreScope")
+
+<widget target-zone="admin_button_toolbar_before">
+    <button id="SaveConfigButton" type="submit" name="save" class="btn btn-warning" value="save">
+        <i class="fa fa-check"></i>
+        <span>@T("Admin.Common.Save")</span>
+    </button>
+</widget>
+
+
+<div class="plugin-configuration">
+    <div>
+        <div class="alert alert-info alert-dismissible">
+            @Html.Raw(T("Plugins.SmartStore.SwissBitcoinPay.AdminInstruction"))
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    </div>
+    <div>
+        <a href="https://www.swiss-bitcoin-pay.com" target="_blank">
+            <img src="@Url.Content("~/Modules/Smartstore.SwissBitcoinPay/branding.png")" alt="Swiss Bitcoin Pay" />
+        </a>
+    </div>
+</div>
+
+<form asp-action="Configure">
+    <!--<div asp-validation-summary="All"/>-->
+<div class="adminContent">
+    <div class="adminRow">
+        <div class="adminTitle">
+            <smart-label asp-for="ApiUrl" />
+        </div>
+            <div class="adminData">
+                <setting-editor asp-for="ApiUrl" />
+                <span asp-validation-for="ApiUrl"/>
+        </div>
+    </div>
+
+    <div class="adminRow">
+        <div class="adminTitle">
+                <smart-label asp-for="ApiKey" />
+            </div>
+            <div class="adminData">
+                <setting-editor asp-for="ApiKey" />
+                <span asp-validation-for="ApiKey"/>
+            </div>
+    </div>
+
+    <div class="adminRow">
+        <div class="adminTitle">
+                <smart-label asp-for="ApiSecret" />
+            </div>
+            <div class="adminData">
+                <setting-editor asp-for="ApiSecret" />
+                <span asp-validation-for="ApiSecret"/>
+            </div>
+    </div>
+
+        <div class="adminRow">
+            <div class="adminTitle">
+                <smart-label asp-for="AdditionalFee" />
+            </div>
+            <div class="adminData">
+                <editor asp-for="AdditionalFee" sm-postfix="@ViewBag.StoreCurrencyCode" />
+                <span asp-validation-for="AdditionalFee"></span>
+            </div>
+        </div>
+        <div class="adminRow">
+            <div class="adminTitle">
+                <smart-label asp-for="AdditionalFeePercentage" />
+            </div>
+            <div class="adminData">
+                <editor asp-for="AdditionalFeePercentage" />
+                <span asp-validation-for="AdditionalFeePercentage"></span>
+            </div>
+        </div>
+</div>
+
+</form>
