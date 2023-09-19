@@ -53,11 +53,11 @@ namespace Smartstore.SwissBitcoinPay.Controllers
 
                 step++;
                 string Description = jsonData.description;
-                var tblDescription = Description.Split("#");
+                var tblDescription = Description.Split(" | ");
                 step++;
-                string OrderGuid = tblDescription[1].Split(":")[1].Trim();
+                string OrderGuid = tblDescription[1].Split(" : ")[1];
                 step++;
-                int StoreID = Convert.ToInt32(tblDescription[2].Split(":")[1].Trim());
+                int StoreID = Convert.ToInt32(tblDescription[2].Split(" : ")[1]);
                 step++;
 
                 if (String.IsNullOrEmpty(OrderGuid) || StoreID == 0)

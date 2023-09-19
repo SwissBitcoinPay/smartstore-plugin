@@ -14,5 +14,11 @@ namespace SmartStore.SwissBitcoinPay.Models
         public string emailLanguage;
         public string redirectAfterPaid;
         public string webhook;
+        public SwissBitcoinPayExtraModel extra;
+    }
+
+    public struct SwissBitcoinPayExtraModel
+    {
+        public string CustomNote;
     }
 }

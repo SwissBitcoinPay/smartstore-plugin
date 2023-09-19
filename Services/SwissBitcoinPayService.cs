@@ -30,7 +30,7 @@ namespace SmartStore.SwissBitcoinPay.Services
                 var invoice = new SwissBitcoinPayInvoiceModel()
 				{
                     title = paymentData.Description,
-                    description = $"{paymentData.BuyerName}#Order:{paymentData.OrderID}#Store:{paymentData.StoreID.ToString()}",
+                    description = $"{paymentData.BuyerName} | Order : {paymentData.OrderID} | Store : {paymentData.StoreID.ToString()}",
                     unit = paymentData.CurrencyCode,
 					amount = paymentData.Amount,
                     email = paymentData.BuyerEmail,
@@ -38,7 +38,11 @@ namespace SmartStore.SwissBitcoinPay.Services
                     redirectAfterPaid = paymentData.RedirectionURL,
                     webhook = paymentData.WebHookURL,
                     delay = 60,
-                    onChain = settings.AcceptOnChain
+                    onChain = settings.AcceptOnChain,
+                    extra = new SwissBitcoinPayExtraModel()
+                    {
+                        CustomNote = $"Order {paymentData.OrderID}"
+                    }
 				};
 				var invoiceJson = JsonConvert.SerializeObject(invoice, Formatting.None);
 
