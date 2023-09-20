@@ -41,7 +41,7 @@ namespace SmartStore.SwissBitcoinPay.Services
                     onChain = settings.AcceptOnChain,
                     extra = new SwissBitcoinPayExtraModel()
                     {
-                        CustomNote = $"Order {paymentData.OrderID}"
+                        customNote = $"Order {paymentData.OrderID}"
                     }
 				};
 				var invoiceJson = JsonConvert.SerializeObject(invoice, Formatting.None);

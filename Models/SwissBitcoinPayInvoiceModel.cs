@@ -19,6 +19,6 @@ namespace SmartStore.SwissBitcoinPay.Models
 
     public struct SwissBitcoinPayExtraModel
     {
-        public string CustomNote;
+        public string customNote;
     }
 }
