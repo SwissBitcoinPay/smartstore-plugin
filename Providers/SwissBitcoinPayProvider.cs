@@ -7,6 +7,7 @@ using Smartstore.Core.Checkout.Orders;
 using Smartstore.Core.Checkout.Payment;
 using Smartstore.Core.Common.Services;
 using Smartstore.Core.Configuration;
+using Smartstore.Core.Data;
 using Smartstore.Core.Identity;
 using Smartstore.Core.Widgets;
 using Smartstore.Engine.Modularity;
@@ -27,10 +28,10 @@ namespace Smartstore.SwissBitcoinPay.Providers
 
         private readonly ICommonServices _services;
         private readonly ICustomerService _customerService;
-        private readonly IOrderService _orderService;
         private readonly ILocalizationService _localizationService;
         private readonly ICurrencyService _currencyService;
         private readonly ISettingFactory _settingFactory;
+        private readonly SmartDbContext _db;
 
         public PaymentProvider(
             ICommonServices services,
@@ -38,14 +39,14 @@ namespace Smartstore.SwissBitcoinPay.Providers
             ICustomerService customerService,
             ISettingFactory settingFactory,
             ICurrencyService currencyService,
-            IOrderService orderService)
+            SmartDbContext db)
         {
             _localizationService = localizationService;
             _services = services;
             _currencyService = currencyService;
             _customerService = customerService;
             _settingFactory = settingFactory;
-            _orderService = orderService;
+            _db = db;
         }
 
         public ILogger Logger { get; set; } = NullLogger.Instance;
@@ -81,19 +82,34 @@ namespace Smartstore.SwissBitcoinPay.Providers
 
                 var myStore = _services.StoreContext.CurrentStore;
                 var settings = await _settingFactory.LoadSettingsAsync<SwissBitcoinPaySettings>(myStore.Id);
-                var myCustomer = await _customerService.GetAuthenticatedCustomerAsync();
+
+                string sEmail;
+                string sFullName;
+                Customer? myCustomer = await _customerService.GetAuthenticatedCustomerAsync();
+                if (myCustomer == null)
+                {
+                    myCustomer = _db.Customers.FirstOrDefault(x => x.Id == processPaymentRequest.CustomerId)
+                                        ?? throw new Exception("Customer not found");
+                    sEmail = myCustomer.BillingAddress.Email;
+                    sFullName = myCustomer.BillingAddress.GetFullName();
+                }
+                else
+                {
+                    sEmail = myCustomer.Email;
+                    sFullName = myCustomer.FullName;
+                }
 
                 var apiService = new SwissBitcoinPayService();
                 result.AuthorizationTransactionResult = apiService.CreateInvoice(settings, new PaymentDataModel()
                 {
                     CurrencyCode = _currencyService.PrimaryCurrency.CurrencyCode,
                     Amount = processPaymentRequest.OrderTotal,
-                    BuyerEmail = "" + myCustomer.Email,
-                    BuyerName = myCustomer.FirstName + " " + myCustomer.LastName,
+                    BuyerEmail = sEmail,
+                    BuyerName = sFullName,
                     OrderID = processPaymentRequest.OrderGuid.ToString(),
                     StoreID = myStore.Id,
                     CustomerID = myCustomer.Id,
-                    Description = "From " + myStore.Name,
+                    Description = $"From {myStore.Name}",
                     RedirectionURL = myStore.Url + "checkout/completed",
                     Lang = _services.WorkContext.WorkingLanguage.LanguageCulture,
                     WebHookURL = myStore.Url + "SbpHook/Process"
@@ -118,5 +134,21 @@ namespace Smartstore.SwissBitcoinPay.Providers
             }
             return Task.CompletedTask;
         }
+
+        /// <summary>
+        /// When true user can reprocess payment from MyAccount > Orders > OrderDetail
+        /// </summary>
+        public override Task<bool> CanRePostProcessPaymentAsync(Order order)
+        {
+            if (order == null)
+                throw new ArgumentNullException("order");
+
+            if (order.PaymentStatus == PaymentStatus.Pending && (DateTime.UtcNow - order.CreatedOnUtc).TotalSeconds > 5)
+            {
+                return Task.FromResult(true);
+            }
+            return Task.FromResult(false);
+        }
+
     }
 }
