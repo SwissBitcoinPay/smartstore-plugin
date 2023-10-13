@@ -57,10 +57,8 @@ namespace Smartstore.SwissBitcoinPay.Controllers
                 step++;
                 string OrderGuid = tblDescription[1].Split(" : ")[1];
                 step++;
-                int StoreID = Convert.ToInt32(tblDescription[2].Split(" : ")[1]);
-                step++;
 
-                if (String.IsNullOrEmpty(OrderGuid) || StoreID == 0)
+                if (String.IsNullOrEmpty(OrderGuid))
                 {
                     Logger.Error("Missing fields in request");
                     return StatusCode(StatusCodes.Status422UnprocessableEntity);

@@ -30,7 +30,7 @@ namespace SmartStore.SwissBitcoinPay.Services
                 var invoice = new SwissBitcoinPayInvoiceModel()
 				{
                     title = paymentData.Description,
-                    description = $"{paymentData.BuyerName} | Order : {paymentData.OrderID} | Store : {paymentData.StoreID.ToString()}",
+                    description = $"{paymentData.BuyerName} | Order : {paymentData.OrderID}",
                     unit = paymentData.CurrencyCode,
 					amount = paymentData.Amount,
                     email = paymentData.BuyerEmail,
