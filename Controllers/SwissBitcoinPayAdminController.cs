@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Smartstore.ComponentModel;
 using Smartstore.Core.Common.Services;
 using Smartstore.Core.Security;
@@ -38,12 +39,14 @@ namespace Smartstore.SwissBitcoinPay.Controllers
         {
             if (!ModelState.IsValid)
             {
+                HttpContext.Session.SetString("ViewMsgError", "Incorrect data");
                 return Configure(storeId, settings);
             }
 
             ModelState.Clear();
             MiniMapper.Map(model, settings);
 
+            HttpContext.Session.SetString("ViewMsg", "Save OK");
             return RedirectToAction(nameof(Configure));
         }
 
