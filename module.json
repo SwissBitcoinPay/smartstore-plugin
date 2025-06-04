@@ -4,8 +4,8 @@
   "SystemName": "Smartstore.SwissBitcoinPay",
   "FriendlyName": "Bitcoin payment with Swiss Bitcoin Pay",
   "Description": "This plugin enables Bitcoin payment with Swiss Bitcoin Pay",
-  "Version": "5.0.6",
-  "MinAppVersion": "5.0.5",
+  "Version": "6.0.0.0",
+  "MinAppVersion": "6.0.0",
   "Author": "Nisaba Solutions",
   "Order": 1,
   "ResourceRootKey": "Plugins.Smartstore.SwissBitcoinPay"
